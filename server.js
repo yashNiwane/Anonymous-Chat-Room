@@ -15,6 +15,9 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// Map to store passcodes and corresponding rooms
+const passcodeToRoom = new Map();
+
 // WebSocket connection handling
 io.on('connection', (socket) => {
     console.log('A user connected');
@@ -22,13 +25,22 @@ io.on('connection', (socket) => {
     // Handle joining a room
     socket.on('join', (passcode) => {
         console.log(`User joined with passcode: ${passcode}`);
-        socket.join(passcode);
+
+        // Create or retrieve room based on passcode
+        let room = passcodeToRoom.get(passcode);
+        if (!room) {
+            room = `room-${passcode}`;
+            passcodeToRoom.set(passcode, room);
+        }
+
+        socket.join(room);
     });
 
     // Handle incoming messages
-    socket.on('message', (message) => {
-        // Broadcast the message to everyone in the room
-        io.emit('message', message);
+    socket.on('message', (data) => {
+        // Broadcast the message to everyone in the sender's room
+        const room = Object.keys(socket.rooms).find((room) => room.startsWith('room-'));
+        io.to(room).emit('message', data);
     });
 
     // Handle disconnection
