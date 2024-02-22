@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+}
+
+input {
+    padding: 8px;
+    margin: 8px;
+}
+
+button {
+    padding: 10px;
+    cursor: pointer;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Anonymous Chat Room</h1>
+        <label for="passcode">Enter 4-Digit Passcode:</label>
+        <input type="text" id="passcode" maxlength="4">
+        <button onclick="connect()">Connect</button>
+        <div id="chatContainer" style="display: none;">
+            <div id="chat"></div>
+            <input type="text" id="messageInput" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+
+    <script>
+        let passcode;
+let chatContainer = document.getElementById('chatContainer');
+let chat = document.getElementById('chat');
+
+function connect() {
+    const passcodeInput = document.getElementById('passcode');
+
+    passcode = passcodeInput.value;
+
+    if (passcode.length !== 4 || isNaN(passcode)) {
+        alert('Invalid passcode. Please enter a 4-digit number.');
+    } else {
+        // Connection successful, show the chat container
+        document.getElementById('chatContainer').style.display = 'block';
+        document.getElementById('passcode').disabled = true;
+    }
+}
+
+function sendMessage() {
+    const messageInput = document.getElementById('messageInput');
+    const message = messageInput.value;
+
+    // You can implement the logic to send messages to the chat room here
+    // For simplicity, let's just append the message to the chat div
+    chat.innerHTML += `<p><strong>You:</strong> ${message}</p>`;
+
+    // Clear the input field
+    messageInput.value = '';
+}
+
+    </script>
+</body>
+</html>
