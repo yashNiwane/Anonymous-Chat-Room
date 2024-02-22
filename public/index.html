@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Anonymous Chat Room</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Anonymous Chat Room</h1>
+        <label for="passcode">Enter 4-Digit Passcode:</label>
+        <input type="text" id="passcode" maxlength="4">
+        <button onclick="connect()">Connect</button>
+        <div id="chatContainer" style="display: none;">
+            <div id="chat"></div>
+            <input type="text" id="messageInput" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
