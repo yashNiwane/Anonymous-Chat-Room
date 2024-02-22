@@ -1,24 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Anonymous Chat Room</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anonymous Messages</title>
+  <!-- Add the Tailwind CSS CDN link here -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Add Font Awesome CDN for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    integrity="sha384-GLhlTQ8iow//ELS41PQ7ibekGG8Ct1EMLIiuBlueoqh2Dhx0E/1A6QgmhPc8Kgbl" crossorigin="anonymous">
+
+  <!-- Custom styling for a modern look -->
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.9);
+      /* Semi-transparent white background */
+      border-radius: 10px;
+      box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3);
+      /* Soft box shadow */
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #4CAF50;
+      /* Teal color */
+    }
+
+    .input-group input,
+    .input-group textarea,
+    .input-group [type="file"] {
+      @apply w-full px-3 py-2 border rounded-md bg-teal-100;
+      /* Teal background color */
+      margin-bottom: 10px;
+    }
+
+    .file-upload-btn,
+    .btn {
+      @apply bg-teal-500 text-white px-4 py-2 rounded-md cursor-pointer hover:bg-teal-700 transition;
+    }
+
+    .file-input {
+      display: none;
+    }
+
+    /* Styling for Font Awesome icon */
+    .fa-upload {
+      margin-right: 8px;
+    }
+
+    /* Additional styling for a more centered layout */
+    h1 {
+      text-align: center;
+      color: #4CAF50;
+      /* Teal color */
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>Anonymous Chat Room</h1>
-        <label for="passcode">Enter 4-Digit Passcode:</label>
-        <input type="text" id="passcode" maxlength="4">
-        <button onclick="connect()">Connect</button>
-        <div id="chatContainer" style="display: none;">
-            <div id="chat"></div>
-            <input type="text" id="messageInput" placeholder="Type your message...">
-            <button onclick="sendMessage()">Send</button>
-        </div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.js"></script>
-    <script src="script.js"></script>
+
+  <div class="container">
+    <h1 class="text-3xl font-bold mb-6">Anonymous Messages</h1>
+
+    <form action="https://formspree.io/f/xayrjwrg" method="POST">
+      <div class="input-group">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name"
+          class="w-full px-3 py-2 border rounded-md bg-teal-100">
+      </div>
+
+      <div class="input-group">
+        <label for="message">Your Message:</label>
+        <textarea id="message" name="message" placeholder="Write your anonymous message"
+          class="w-full px-3 py-2 border rounded-md bg-teal-100"></textarea>
+      </div>
+
+      <div class="input-group">
+        <label for="file" class="flex items-center cursor-pointer">
+          <span class="text-teal-500"><i class="fas fa-upload"></i> Choose File</span>
+          <input type="file" id="file" name="file" class="file-input">
+        </label>
+        <button type="submit" class="btn">Submit Message</button>
+      </div>
+    </form>
+
+  </div>
+
+  <script>
+    // You can keep your existing JavaScript logic here
+    function submitMessage() {
+      // Add your JavaScript logic for handling and storing anonymous messages here
+      alert('Message submitted successfully!');
+    }
+  </script>
+
 </body>
+
 </html>
